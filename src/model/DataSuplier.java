@@ -18,11 +18,20 @@ import view.PesanDialog;
 
 public class DataSuplier {
 private String namaSuplier,alamatSuplier,telpSuplier;
+private int idSuplier;
+
 private String pesan;
 private Object [][] list;
 private final koneksi conn=new koneksi();
 private final PesanDialog pesanDialog=new PesanDialog();
 
+    public int getIdSuplier() {
+        return idSuplier;
+    }
+
+    public void setIdSuplier(int idSuplier) {
+        this.idSuplier = idSuplier;
+    }
     public String getNamaSuplier() {
         return namaSuplier;
     }
@@ -76,6 +85,7 @@ private final PesanDialog pesanDialog=new PesanDialog();
                 
                 rset.next();
                 if (rset.getRow()>0){
+                    this.idSuplier=rset.getInt("id");
                     this.namaSuplier = rset.getString("nama");
                     this.alamatSuplier = rset.getString("alamat");
                     this.telpSuplier=rset.getString("telp");
@@ -110,7 +120,7 @@ private final PesanDialog pesanDialog=new PesanDialog();
             ResultSet rset;
             
             try { 
-                SQLStatemen = "select nama,alamat from suplier"; 
+                SQLStatemen = "select id,nama,alamat from suplier"; 
                 sta = connection.createStatement(); 
                 rset = sta.executeQuery(SQLStatemen);
                 
@@ -121,7 +131,7 @@ private final PesanDialog pesanDialog=new PesanDialog();
                     rset.first();
                     int i=0;
                     do { 
-                        list[i] = new Object[]{rset.getString("nama"), rset.getString("alamat")};
+                        list[i] = new Object[]{rset.getInt("id"),rset.getString("nama"), rset.getString("alamat")};
                         i++;
                     } while (rset.next());
                 }

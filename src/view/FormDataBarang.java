@@ -14,6 +14,7 @@ import controller.DataBarangController;
 public class FormDataBarang extends javax.swing.JInternalFrame {
 
     private final DataBarangController dataBarangController = new DataBarangController();
+    private String[] satuan={"pcs","Kg","L","box"};
 
     /**
      * Creates new form FormDataBarang

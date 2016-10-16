@@ -46,6 +46,11 @@ public class FormLihatBarang extends javax.swing.JDialog {
         tutupButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
@@ -173,11 +178,7 @@ public class FormLihatBarang extends javax.swing.JDialog {
         return kodeBarangDipilih;
     }
 
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {
-        // TODO add your handling code here:
-        kodeBarangDipilih = "";
-    }
-
+   
 
     private void tutupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tutupButtonActionPerformed
         // TODO add your handling code here:
@@ -211,6 +212,11 @@ public class FormLihatBarang extends javax.swing.JDialog {
             pilihButton.doClick();
         }
     }//GEN-LAST:event_dataBarangTabelMousePressed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+        kodeBarangDipilih="";
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments

@@ -19,9 +19,18 @@ import view.PesanDialog;
 public class DataCustomer {
 private String namaCustomer,alamatCustomer,telpCustomer;
 private String pesan;
+private int idCustomer;
 private Object [][] list;
 private final koneksi conn=new koneksi();
 private final PesanDialog pesanDialog=new PesanDialog();
+
+    public int getIdCustomer() {
+        return idCustomer;
+    }
+
+    public void setIdCustomer(int idCustomer) {
+        this.idCustomer = idCustomer;
+    }
 
     public String getNamaCustomer() {
         return namaCustomer;
@@ -61,6 +70,7 @@ private final PesanDialog pesanDialog=new PesanDialog();
     }
 
 
+
     public boolean baca(String namaCustomer){
         boolean adaKesalahan = false;
         Connection connection;
@@ -76,6 +86,7 @@ private final PesanDialog pesanDialog=new PesanDialog();
                 
                 rset.next();
                 if (rset.getRow()>0){
+                    this.idCustomer=rset.getInt("id");
                     this.namaCustomer = rset.getString("nama");
                     this.alamatCustomer = rset.getString("alamat");
                     this.telpCustomer=rset.getString("telp");
@@ -99,6 +110,44 @@ private final PesanDialog pesanDialog=new PesanDialog();
         return !adaKesalahan;
     }
 
+    public boolean bacaId(int idCustomer){
+        boolean adaKesalahan = false;
+        Connection connection;
+        
+        if ((connection = conn.getConnection()) != null){
+            Statement sta;
+            ResultSet rset;
+            
+            try {
+                String SQLStatemen = "select * from customer where id='"+idCustomer+"'";
+                sta = connection.createStatement();
+                rset = sta.executeQuery(SQLStatemen);
+                
+                rset.next();
+                if (rset.getRow()>0){
+                    this.idCustomer=rset.getInt("id");
+                    this.namaCustomer = rset.getString("nama");
+                    this.alamatCustomer = rset.getString("alamat");
+                    this.telpCustomer=rset.getString("telp");
+                } else {
+                    adaKesalahan = true;
+                    pesan = "Id Customer \""+idCustomer+"\" tidak ditemukan";
+                }
+                
+                sta.close();
+                rset.close();
+                connection.close();
+            } catch (SQLException ex){
+                adaKesalahan = true; 
+                pesan = "Tidak dapat membuka tabel customer\n"+ex;
+            }
+        } else {
+            adaKesalahan = true;
+            pesan = "Tidak dapat melakukan koneksi ke server\n"+conn.getPesanKesalahan();
+        }
+        
+        return !adaKesalahan;
+    }
     public boolean bacaData(){
         boolean adaKesalahan = false;
         Connection connection;
@@ -110,7 +159,7 @@ private final PesanDialog pesanDialog=new PesanDialog();
             ResultSet rset;
             
             try { 
-                SQLStatemen = "select nama,alamat from customer"; 
+                SQLStatemen = "select id,nama,alamat from customer"; 
                 sta = connection.createStatement(); 
                 rset = sta.executeQuery(SQLStatemen);
                 
@@ -121,7 +170,7 @@ private final PesanDialog pesanDialog=new PesanDialog();
                     rset.first();
                     int i=0;
                     do { 
-                        list[i] = new Object[]{rset.getString("nama"), rset.getString("alamat")};
+                        list[i] = new Object[]{rset.getInt("id"),rset.getString("nama"), rset.getString("alamat")};
                         i++;
                     } while (rset.next());
                 }

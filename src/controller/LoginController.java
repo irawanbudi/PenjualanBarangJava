@@ -8,40 +8,40 @@ package controller;
 
 import javax.swing.JOptionPane;
 import model.Enkripsi;
-import model.User;
+import model.DataUser;
 
 /**
  *
- * @author Aries Saifudin
+ * @author Irawan
  */
 public class LoginController {
-    private final Mahasiswa mahasiswa = new Mahasiswa();
+    private final DataUser dataUser = new DataUser();
     private final Enkripsi enkripsi = new Enkripsi();
     
-    public boolean validasi(javax.swing.JTextField userIdTextField, javax.swing.JPasswordField passwordField){
+    public boolean validasi(javax.swing.JTextField userNameTextField, javax.swing.JPasswordField passwordField){
         boolean valid = false;
         String hashedInputPassword = "";
         
-        if (!userIdTextField.getText().equals("")){
-            if (mahasiswa.baca(userIdTextField.getText())){
+        if (!userNameTextField.getText().equals("")){
+            if (dataUser.baca(userNameTextField.getText())){
                 try {
                     hashedInputPassword = enkripsi.hashMD5(new String(passwordField.getPassword()));
                 } catch (Exception ex){}
                 
-                if (mahasiswa.getPassword().equalsIgnoreCase(hashedInputPassword)){
+                if (dataUser.getPassword().equalsIgnoreCase(hashedInputPassword)){
                     valid = true;
                 } else {
-                    JOptionPane.showMessageDialog(null, "User Id (NIM) atau password salah", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Username atau password salah", "Kesalahan", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                if (mahasiswa.getPesan().substring(0, 3).equalsIgnoreCase("NIM")){
-                    JOptionPane.showMessageDialog(null, "User Id (NIM) atau password salah", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+                if (dataUser.getPesan().substring(0, 3).equalsIgnoreCase("userId")){
+                    JOptionPane.showMessageDialog(null, "Username atau password salah", "Kesalahan", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(null, mahasiswa.getPesan(), "Kesalahan", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, dataUser.getPesan(), "Kesalahan", JOptionPane.ERROR_MESSAGE);
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "User Id (NIM) tidak boleh kosong", "Kesalahan", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Username tidak boleh kosong", "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
         
         return valid;

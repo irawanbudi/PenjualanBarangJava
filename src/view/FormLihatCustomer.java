@@ -46,6 +46,11 @@ public class FormLihatCustomer extends javax.swing.JDialog {
         tutupButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
@@ -54,11 +59,11 @@ public class FormLihatCustomer extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Nama Customer", "Alamat Customer"
+                "ID", "Nama Customer", "Alamat Customer"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -72,9 +77,12 @@ public class FormLihatCustomer extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(dataCustomerTabel);
         if (dataCustomerTabel.getColumnModel().getColumnCount() > 0) {
-            dataCustomerTabel.getColumnModel().getColumn(0).setMinWidth(150);
-            dataCustomerTabel.getColumnModel().getColumn(0).setPreferredWidth(150);
-            dataCustomerTabel.getColumnModel().getColumn(0).setMaxWidth(150);
+            dataCustomerTabel.getColumnModel().getColumn(0).setMinWidth(40);
+            dataCustomerTabel.getColumnModel().getColumn(0).setPreferredWidth(40);
+            dataCustomerTabel.getColumnModel().getColumn(0).setMaxWidth(40);
+            dataCustomerTabel.getColumnModel().getColumn(1).setMinWidth(150);
+            dataCustomerTabel.getColumnModel().getColumn(1).setPreferredWidth(150);
+            dataCustomerTabel.getColumnModel().getColumn(1).setMaxWidth(150);
         }
 
         jLabel1.setLabelFor(dataCustomerTabel);
@@ -168,10 +176,6 @@ public class FormLihatCustomer extends javax.swing.JDialog {
         return namaCustomerDipilih;
     }
 
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {
-        // TODO add your handling code here:
-        namaCustomerDipilih = "";
-    }
 
     private void tutupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tutupButtonActionPerformed
         // TODO add your handling code here:
@@ -191,13 +195,18 @@ public class FormLihatCustomer extends javax.swing.JDialog {
     private void pilihButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pilihButtonActionPerformed
         // TODO add your handling code here:
         if (dataCustomerTabel.getSelectedRowCount() > 0) {
-            namaCustomerDipilih = dataCustomerTabel.getValueAt(dataCustomerTabel.getSelectedRow(), 0).toString();
+            namaCustomerDipilih = dataCustomerTabel.getValueAt(dataCustomerTabel.getSelectedRow(), 1).toString();
             dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Belum ada yang dipilih!!");
         }
 
     }//GEN-LAST:event_pilihButtonActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+                namaCustomerDipilih = "";
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments

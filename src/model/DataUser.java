@@ -17,18 +17,18 @@ import view.PesanDialog;
  */
 
 public class DataUser {
-private String userId,password;
+private String username,password;
 private String pesan;
 private Object [][] list;
 private final koneksi conn=new koneksi();
 private final PesanDialog pesanDialog=new PesanDialog();
 
-    public String getUserId() {
-        return userId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -53,7 +53,7 @@ private final PesanDialog pesanDialog=new PesanDialog();
     }
 
 
-    public boolean baca(String namaCustomer){
+    public boolean baca(String username){
         boolean adaKesalahan = false;
         Connection connection;
         
@@ -62,18 +62,18 @@ private final PesanDialog pesanDialog=new PesanDialog();
             ResultSet rset;
             
             try {
-                String SQLStatemen = "select * from user where userid='"+userId+"'";
+                String SQLStatemen = "select * from user where username='"+username+"'";
                 sta = connection.createStatement();
                 rset = sta.executeQuery(SQLStatemen);
                 
                 rset.next();
                 if (rset.getRow()>0){
-                    this.userId = rset.getString("userId");
+                    this.username = rset.getString("username");
                     this.password = rset.getString("password");
                    // this.telpCustomer=rset.getString("telp");
                 } else {
                     adaKesalahan = true;
-                    pesan = "User ID \""+userId+"\" tidak ditemukan";
+                    pesan = "Username \""+username+"\" tidak ditemukan";
                 }
                 
                 sta.close();
@@ -102,7 +102,7 @@ private final PesanDialog pesanDialog=new PesanDialog();
             ResultSet rset;
             
             try { 
-                SQLStatemen = "select userid,password from user"; 
+                SQLStatemen = "select username,password from user"; 
                 sta = connection.createStatement(); 
                 rset = sta.executeQuery(SQLStatemen);
                 
@@ -113,7 +113,7 @@ private final PesanDialog pesanDialog=new PesanDialog();
                     rset.first();
                     int i=0;
                     do { 
-                        list[i] = new Object[]{rset.getString("userid"), rset.getString("password")};
+                        list[i] = new Object[]{rset.getString("username"), rset.getString("password")};
                         i++;
                     } while (rset.next());
                 }
@@ -141,24 +141,24 @@ private final PesanDialog pesanDialog=new PesanDialog();
             boolean simpan = false; 
             
             try {
-                String SQLStatemen = "select * from user where userid='"+userId+"'";
+                String SQLStatemen = "select * from user where username='"+username+"'";
                 Statement sta = connection.createStatement();
                 ResultSet rset = sta.executeQuery(SQLStatemen);
                 
                 rset.next();
                 if (rset.getRow()>0){
-                    if (pesanDialog.tampilkanPilihan("User ID sudah ada\nApakah data diperbaharui?","Konfirmasi", new Object[]{"Ya","Tidak"}) == 0){
+                    if (pesanDialog.tampilkanPilihan("Username sudah ada\nApakah data diperbaharui?","Konfirmasi", new Object[]{"Ya","Tidak"}) == 0){
                         simpan = true;
                         SQLStatemen = "update user set password='" + password + 
-                                "' where userid='" + userId + "'";
+                                "' where username='" + username + "'";
                         System.out.println(SQLStatemen);
                         sta = connection.createStatement();
                         jumlahSimpan = sta.executeUpdate(SQLStatemen); 
                     }
                 } else {
                     simpan = true;
-                    SQLStatemen = "insert into user(userid, password) values ('" +
-                            userId + "','" + password + "')"; 
+                    SQLStatemen = "insert into user(username, password) values ('" +
+                            username + "','" + password + "')"; 
                     sta = connection.createStatement();
                     jumlahSimpan = sta.executeUpdate(SQLStatemen);
                 }
@@ -184,7 +184,7 @@ private final PesanDialog pesanDialog=new PesanDialog();
         
         return !adaKesalahan;
     }
-    public boolean hapus(String userId){
+    public boolean hapus(String username){
         boolean adaKesalahan = false;	
         Connection connection; 
         
@@ -193,12 +193,12 @@ private final PesanDialog pesanDialog=new PesanDialog();
             Statement sta;
             
             try {
-                String SQLStatemen = "delete from user where userid='"+userId+"'";
+                String SQLStatemen = "delete from user where username='"+username+"'";
                 sta = connection.createStatement();
                 jumlahHapus = sta.executeUpdate(SQLStatemen);
                 
                 if (jumlahHapus < 1){
-                    pesan = "Data user dengan userid "+userId+" tidak ditemukan";
+                    pesan = "Data user dengan username "+username+" tidak ditemukan";
                     adaKesalahan = true;
                 }
                 

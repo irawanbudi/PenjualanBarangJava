@@ -5,18 +5,18 @@
  */
 package view;
 
-import controller.DataCustomerController;
+import controller.DataUserController;
 
 /**
  *
  * @author Irawan
  */
 public class FormDataUser extends javax.swing.JInternalFrame {
-
-    private final DataCustomerController dataCustomerController = new DataCustomerController();
+    
+    private final DataUserController dataUserController = new DataUserController();
 
     /**
-     * Creates new form FormDataBarang
+     * Creates new form FormDataUser
      */
     public FormDataUser() {
         initComponents();
@@ -52,6 +52,11 @@ public class FormDataUser extends javax.swing.JInternalFrame {
         namaBarangLabel.setText("Password :");
 
         passwordField.setText("jPasswordField1");
+        passwordField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwordFieldKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -153,31 +158,23 @@ public class FormDataUser extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public String getNama() {
+    public String getUsername() {
         return userIdTextField.getText();
     }
-
-    public void setNama(String nama) {
-        userIdTextField.setText(nama);
-    }
-
-    public String getAlamat() {
-        return alamatCustomerTextArea.getText();
-    }
-
-    public void setAlamat(String alamat) {
-        alamatCustomerTextArea.setText(alamat);
-    }
-
-    public String getTelp() {
-        return telpCustomerTextField.getText();
-    }
-
-    public void setTelp(String telp) {
-        telpCustomerTextField.setText(telp);
-    }
-
     
+    public void setUsername(String username) {
+        userIdTextField.setText(username);
+    }
+    
+    public String getPassword() {
+        return passwordField.getPassword().toString();
+    }
+
+    public void setPassword(String password) {
+        passwordField.setText("");
+    }
+    
+
     private void tutupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tutupButtonActionPerformed
         // TODO add your handling code here:
         dispose();
@@ -185,13 +182,18 @@ public class FormDataUser extends javax.swing.JInternalFrame {
 
     private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
         // TODO add your handling code here:
-dataUserController.simpan(userIdTextField, alamatCustomerTextArea, telpCustomerTextField);
+        dataUserController.simpan(userIdTextField, passwordField);
     }//GEN-LAST:event_simpanButtonActionPerformed
 
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
         // TODO add your handling code here:
-        dataCustomerController.hapus(userIdTextField);
+        dataUserController.hapus(userIdTextField);
     }//GEN-LAST:event_hapusButtonActionPerformed
+
+    private void passwordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFieldKeyPressed
+        // TODO add your handling code here:
+        dataUserController.setHashed(false);
+    }//GEN-LAST:event_passwordFieldKeyPressed
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

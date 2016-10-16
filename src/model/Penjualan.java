@@ -8,34 +8,75 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import view.FormLogin;
+
 /**
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRResultSetDataSource;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
-import net.sf.jasperreports.view.JasperViewer;
-/**
-/**
+ * import net.sf.jasperreports.engine.JRException; import
+ * net.sf.jasperreports.engine.JRResultSetDataSource; import
+ * net.sf.jasperreports.engine.JasperCompileManager; import
+ * net.sf.jasperreports.engine.JasperFillManager; import
+ * net.sf.jasperreports.engine.JasperPrint; import
+ * net.sf.jasperreports.engine.JasperReport; import
+ * net.sf.jasperreports.engine.design.JasperDesign; import
+ * net.sf.jasperreports.engine.xml.JRXmlLoader; import
+ * net.sf.jasperreports.view.JasperViewer; /** /**
  *
  * @author Irawan
  */
 public class Penjualan {
-    private String kode;
-    private String pesan;
-    //private Object[][] listNilai;
-    private final koneksi conn = new koneksi();
 
-    public String getKode() {
-        return kode;
+    private String kodePenjualan;
+    private int idCustomer;
+    
+    private Date tanggal = new Date();
+    private SimpleDateFormat bentuk = new SimpleDateFormat("hh:mm:ss");
+    private String pesan;
+    private Object[][] listPenjualan;
+    private final koneksi conn = new koneksi();
+    private view.FormUtama formUtama;
+    private String username;
+private long total;
+
+    public long getTotal() {
+        return total;
     }
 
-    public void setKode(String kode) {
-        this.kode = kode;
+    public void setTotal(long total) {
+        this.total = total;
+    }
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public int getIdCustomer() {
+        return idCustomer;
+    }
+
+    public void setIdCustomer(int idCustomer) {
+        this.idCustomer = idCustomer;
+    }
+
+    public Date getTanggal() {
+        return tanggal;
+    }
+
+    public void setTanggal(Date tanggal) {
+        this.tanggal = tanggal;
+    }
+
+    public String getKodePenjualan() {
+        return kodePenjualan;
+    }
+
+    public void setKodePenjualan(String kodePenjualan) {
+        this.kodePenjualan = kodePenjualan;
     }
 
     public String getPesan() {
@@ -45,102 +86,111 @@ public class Penjualan {
     public void setPesan(String pesan) {
         this.pesan = pesan;
     }
-/*
-    public Object[][] getListNilai() {
-        return listNilai;
+
+    public Object[][] getListPenjualan() {
+        return listPenjualan;
     }
 
-    public void setListNilai(Object[][] listNilai) {
-        this.listNilai = listNilai;
+    public void setListPenjualan(Object[][] listPenjualan) {
+        this.listPenjualan = listPenjualan;
     }
-*/    
-    public boolean simpan(){
-        boolean adaKesalahan = false;	
-	Connection connection; 
-	
-	if ((connection = conn.getConnection()) != null){
+
+    public boolean simpan() {
+        boolean adaKesalahan = false;
+        Connection connection;
+
+        if ((connection = conn.getConnection()) != null) {
             int jumlahSimpan = 0;
             String SQLStatemen;
             Statement sta;
-            
-            try{
-                SQLStatemen = "delete from penjualan where kode='"+kode+"'"; 
+            ResultSet rsa;
+            try {
+                SQLStatemen = "delete from penjualan where kodepenjualan='" + kodePenjualan + "'";
                 sta = connection.createStatement();
                 sta.executeUpdate(SQLStatemen);
-            } catch (SQLException ex){}
-  /*          
-            for (int i=0; i < listNilai.length; i++){
+            } catch (SQLException ex) {
+            }
+
+            for (int i = 0; i < listPenjualan.length; i++) {
+                
                 try {
-                    SQLStatemen = "insert into penjualan values ('"+ kode +"','"+ 
-                            listNilai[i][0] + "','" + listNilai[i][1] + "','" +
-                            listNilai[i][2] + "','" + listNilai[i][3] +"')";
+                    SQLStatemen = "insert into penjualan (`kodepenjualan`, "
+                            + "`tanggal`, `idcustomer`, `kasir`, `kodebarang`,"
+                            + " `qty`) values ('" +kodePenjualan + "','"
+                            +tanggal +  "','" + idCustomer + "','" + "kasir" + "','"
+                            + listPenjualan[i][4] + "','" + listPenjualan[i][5] + "')";
                     sta = connection.createStatement();
+                    System.out.println("Query= "+SQLStatemen);
                     jumlahSimpan += sta.executeUpdate(SQLStatemen);
-                } catch (SQLException ex){}
+                } catch (SQLException ex) {
+                }
 
             }
-*/            
-            if (jumlahSimpan>0) {
+
+            if (jumlahSimpan > 0) {
                 adaKesalahan = false;
             }
         } else {
             adaKesalahan = true;
-            pesan = "Tidak dapat melakukan koneksi ke server\n"+conn.getPesanKesalahan();
+            pesan = "Tidak dapat melakukan koneksi ke server\n" + conn.getPesanKesalahan();
         }
-        
+
         return !adaKesalahan;
     }
-    
-    public boolean baca(String kodeBarang){
-        boolean adaKesalahan = false;	
-	Connection connection; 
-        
-	this.kode = kodeBarang;
-	//listNilai = null;
-	
-	if ((connection = conn.getConnection()) != null){
+
+    public boolean baca(String kodePenjualan) {
+        boolean adaKesalahan = false;
+        Connection connection;
+
+        this.kodePenjualan = kodePenjualan;
+        listPenjualan = null;
+
+        if ((connection = conn.getConnection()) != null) {
             String SQLStatemen;
             Statement sta;
             ResultSet rset;
-            
+
             try {
-                SQLStatemen = "select * from barang where kode='"+kodeBarang+"'"; 
+                SQLStatemen = "select * from penjualan where kodepenjualan='" + kodePenjualan + "'";
                 sta = connection.createStatement();
                 rset = sta.executeQuery(SQLStatemen);
-                
+
                 rset.next();
                 rset.last();
-                //listNilai = new Object[rset.getRow()][4];
-                
+                listPenjualan = new Object[rset.getRow()][6];
+
                 rset.first();
-                int i=0;
+                int i = 0;
                 do {
-                    if (!rset.getString("kodematakuliah").equals("")){
-                  //      listNilai[i] = new Object[]{ rset.getString("kodematakuliah"), rset.getInt("tugas"), rset.getInt("uts"), rset.getInt("uas")}; 		    
+                    if (!rset.getString("kodepenjualan").equals("")) {
+                        listPenjualan[i] = new Object[]{rset.getString("kodepenjualan"), 
+                            rset.getDate("tanggal"), rset.getInt("idcustomer"),
+                            rset.getString("kasir"),rset.getString("kodebarang"), 
+                            rset.getInt("qty")};
                     }
                     i++;
                 } while (rset.next());
-                
-/*                if (listNilai.length > 0) {
+
+                if (listPenjualan.length > 0) {
                     adaKesalahan = false;
                 }
-  */              
+
                 sta.close();
                 rset.close();
                 connection.close();
-            } catch (SQLException ex){
+            } catch (SQLException ex) {
                 adaKesalahan = true;
-                pesan = "Tidak dapat membaca data nilai siswa\n"+ex.getMessage();
+                pesan = "Tidak dapat membaca data penjualan\n" + ex.getMessage();
             }
         } else {
             adaKesalahan = true;
-            pesan = "Tidak dapat melakukan koneksi ke server\n"+conn.getPesanKesalahan();
+            pesan = "Tidak dapat melakukan koneksi ke server\n" + conn.getPesanKesalahan();
         }
-        
+
         return !adaKesalahan;
     }
-    
-/*    public boolean cetakLaporan(int semester, String kelas){
+
+    /*    public boolean cetakLaporan(int semester, String kelas){
         boolean adaKesalahan = false;
         Connection connection;
         
@@ -214,5 +264,5 @@ public class Penjualan {
         
         return !adaKesalahan;
     }
-*/
+     */
 }

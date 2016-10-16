@@ -46,6 +46,11 @@ public class FormLihatSuplier extends javax.swing.JDialog {
         tutupButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
@@ -54,11 +59,11 @@ public class FormLihatSuplier extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Nama Suplier", "Alamat Suplier"
+                "ID", "Nama Suplier", "Alamat Suplier"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -72,9 +77,12 @@ public class FormLihatSuplier extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(dataSuplierTabel);
         if (dataSuplierTabel.getColumnModel().getColumnCount() > 0) {
-            dataSuplierTabel.getColumnModel().getColumn(0).setMinWidth(150);
-            dataSuplierTabel.getColumnModel().getColumn(0).setPreferredWidth(150);
-            dataSuplierTabel.getColumnModel().getColumn(0).setMaxWidth(150);
+            dataSuplierTabel.getColumnModel().getColumn(0).setMinWidth(50);
+            dataSuplierTabel.getColumnModel().getColumn(0).setPreferredWidth(50);
+            dataSuplierTabel.getColumnModel().getColumn(0).setMaxWidth(50);
+            dataSuplierTabel.getColumnModel().getColumn(1).setMinWidth(150);
+            dataSuplierTabel.getColumnModel().getColumn(1).setPreferredWidth(150);
+            dataSuplierTabel.getColumnModel().getColumn(1).setMaxWidth(150);
         }
 
         jLabel1.setLabelFor(dataSuplierTabel);
@@ -168,10 +176,6 @@ public class FormLihatSuplier extends javax.swing.JDialog {
         return namaSuplierDipilih;
     }
 
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {
-        // TODO add your handling code here:
-        namaSuplierDipilih = "";
-    }
 
 
     private void tutupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tutupButtonActionPerformed
@@ -192,13 +196,18 @@ public class FormLihatSuplier extends javax.swing.JDialog {
     private void pilihButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pilihButtonActionPerformed
         // TODO add your handling code here:
         if (dataSuplierTabel.getSelectedRowCount() > 0) {
-            namaSuplierDipilih = dataSuplierTabel.getValueAt(dataSuplierTabel.getSelectedRow(), 0).toString();
+            namaSuplierDipilih = dataSuplierTabel.getValueAt(dataSuplierTabel.getSelectedRow(), 1).toString();
             dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Belum ada yang dipilih!!");
         }
 
     }//GEN-LAST:event_pilihButtonActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+        namaSuplierDipilih="";
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
