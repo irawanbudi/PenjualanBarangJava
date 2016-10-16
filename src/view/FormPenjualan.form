@@ -34,6 +34,9 @@
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="internalFrameActivated" listener="javax.swing.event.InternalFrameListener" parameters="javax.swing.event.InternalFrameEvent" handler="formInternalFrameActivated"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -67,93 +70,76 @@
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="namaLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="nimLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="namaBarangTextField" alignment="0" min="-2" pref="239" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="kodeBarangTextField" pref="92" max="32767" attributes="0"/>
-                                      <Component id="namaCustomerTextField" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lihatButton" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="kelasLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="semesterLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="kodePenjualanLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="semesterLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="customerLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="nomorTextField" min="-2" pref="45" max="-2" attributes="0"/>
-                              <Component id="tanggalTextField" min="-2" pref="68" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="tanggalTextField" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="namaCustomerTextField" alignment="0" pref="92" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lihatButton" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="kodePenjualanTextField" min="-2" pref="76" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="236" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="simpanButton" alignment="0" pref="102" max="32767" attributes="0"/>
                               <Component id="tutupButton" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="nilaiPanel" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" pref="85" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextField1" min="-2" pref="263" max="-2" attributes="0"/>
+                          <Component id="totalTextField" min="-2" pref="263" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="17" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
+              <Component id="penjualanPanel" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="simpanButton" alignment="1" min="-2" pref="38" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="simpanButton" min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="tutupButton" min="-2" pref="31" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="namaCustomerTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="tanggalTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="semesterLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="kodePenjualanTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="kodePenjualanLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="nimLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="kodeBarangTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="semesterLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tanggalTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="namaCustomerTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="customerLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lihatButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="namaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="namaBarangTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="kelasLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="nomorTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tutupButton" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="nilaiPanel" min="-2" max="-2" attributes="0"/>
+                  <Component id="penjualanPanel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField1" alignment="3" max="32767" attributes="0"/>
+                      <Component id="totalTextField" alignment="3" max="32767" attributes="0"/>
                       <Component id="jLabel1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
@@ -165,9 +151,6 @@
         <Component class="javax.swing.JButton" name="tutupButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Tutup"/>
-            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="kodeBarangTextField"/>
-            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tutupButtonActionPerformed"/>
@@ -184,53 +167,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="simpanButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="lihatButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Lihat"/>
-          </Properties>
+        <Component class="javax.swing.JTextField" name="kodePenjualanTextField">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lihatButtonActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="kodePenjualanTextFieldKeyPressed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="kodeBarangTextField">
-          <Properties>
-            <Property name="name" type="java.lang.String" value="NIM" noResource="true"/>
-            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="lihatButton"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="kodeBarangTextFieldKeyPressed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="namaLabel">
-          <Properties>
-            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="namaBarangTextField"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Nama Barang"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="nimLabel">
-          <Properties>
-            <Property name="displayedMnemonic" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="(int)&apos;N&apos;" type="code"/>
-            </Property>
-            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="kodeBarangTextField"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Kode Barang"/>
-            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="kodeBarangTextField"/>
-            </Property>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="nomorTextField">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-          </Properties>
-        </Component>
-        <Container class="javax.swing.JPanel" name="nilaiPanel">
+        <Container class="javax.swing.JPanel" name="penjualanPanel">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -242,7 +184,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="1" pref="554" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -263,12 +205,12 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="6" rowCount="1">
-                        <Column editable="false" title="Kode Barang" type="java.lang.Object"/>
+                        <Column editable="true" title="Kode Barang" type="java.lang.Object"/>
                         <Column editable="false" title="NamaBarang" type="java.lang.Object"/>
-                        <Column editable="false" title="Harga" type="java.lang.Object"/>
-                        <Column editable="true" title="Banyaknya" type="java.lang.Object"/>
+                        <Column editable="false" title="Harga" type="java.lang.Long"/>
+                        <Column editable="true" title="Qty" type="java.lang.Integer"/>
                         <Column editable="false" title="Satuan" type="java.lang.Object"/>
-                        <Column editable="false" title="Jumlah" type="java.lang.Object"/>
+                        <Column editable="false" title="Jumlah" type="java.lang.Long"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -325,22 +267,12 @@
             </Container>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="kelasLabel">
+        <Component class="javax.swing.JLabel" name="kodePenjualanLabel">
           <Properties>
             <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="nomorTextField"/>
+              <ComponentRef name="kodePenjualanTextField"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="No."/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="tanggalTextField">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="namaBarangTextField">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
+            <Property name="text" type="java.lang.String" value="Kode Penjualan"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="semesterLabel">
@@ -351,13 +283,12 @@
             <Property name="text" type="java.lang.String" value="Tanggal"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="totalTextField">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="jTextField1"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
@@ -368,16 +299,31 @@
             <Property name="text" type="java.lang.String" value="Total : Rp"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="customerLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Kepada"/>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="namaCustomerTextField"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Customer"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="namaCustomerTextField">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="namaCustomerTextFieldActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="namaCustomerTextFieldKeyPressed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="lihatButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Lihat"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lihatButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tanggalTextField">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>

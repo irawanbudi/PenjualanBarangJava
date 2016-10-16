@@ -7,26 +7,86 @@ package view;
 import controller.PenjualanController;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import model.Penjualan;
 
 /**
  *
  * @author Irawan
  */
 public class FormPenjualan extends javax.swing.JInternalFrame {
+
     private final DefaultTableModel penjualanDefaultTableModel;
-    private final PenjualanController penjualanController=new PenjualanController();
+    private final PenjualanController penjualanController = new PenjualanController();
+    private final Penjualan penjualan = new Penjualan();
+    private int idCustomer, qty;
+    long jumlah, harga;
+    private String Username;
+    private java.util.Date tgl=new Date();
+    private java.text.SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+
+    public String getUsername() {
+        return Username;
+    }
+
+    public void setUsername(String Username) {
+        this.Username = Username;
+    }
+
+    public int getQty() {
+        return qty;
+    }
+
+    public void setQty(int qty) {
+        this.qty = qty;
+    }
+
+    public long getJumlah() {
+        return jumlah;
+    }
+
+    public void setJumlah(long jumlah) {
+        this.jumlah = jumlah;
+    }
+
+    public long getHarga() {
+        return harga;
+    }
+
+    public void setHarga(long harga) {
+        this.harga = harga;
+    }
+
+    public int getIdCustomer() {
+        return idCustomer;
+    }
+
+    public void setIdCustomer(int idCustomer) {
+        this.idCustomer = idCustomer;
+    }
+
+    public JTextField getKodePenjualanTextField() {
+        return kodePenjualanTextField;
+    }
+
+    public void setKodePenjualanTextField(JTextField kodePenjualanTextField) {
+        this.kodePenjualanTextField = kodePenjualanTextField;
+    }
 
     /**
-     * Creates new form FormNilai
+     * Creates new form FormPenjualan
      */
     public FormPenjualan() {
         initComponents();
-        
-        
-        penjualanDefaultTableModel=(DefaultTableModel) penjualanTable.getModel();
+
+        penjualanDefaultTableModel = (DefaultTableModel) penjualanTable.getModel();
         setMnemonic();
+        
+        
     }
 
     /**
@@ -44,23 +104,18 @@ public class FormPenjualan extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         tutupButton = new javax.swing.JButton();
         simpanButton = new javax.swing.JButton();
-        lihatButton = new javax.swing.JButton();
-        kodeBarangTextField = new javax.swing.JTextField();
-        namaLabel = new javax.swing.JLabel();
-        nimLabel = new javax.swing.JLabel();
-        nomorTextField = new javax.swing.JTextField();
-        nilaiPanel = new javax.swing.JPanel();
+        kodePenjualanTextField = new javax.swing.JTextField();
+        penjualanPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         penjualanTable = new javax.swing.JTable();
-        kelasLabel = new javax.swing.JLabel();
-        tanggalTextField = new javax.swing.JTextField();
-        namaBarangTextField = new javax.swing.JTextField();
+        kodePenjualanLabel = new javax.swing.JLabel();
         semesterLabel = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        totalTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        customerLabel = new javax.swing.JLabel();
         namaCustomerTextField = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        lihatButton = new javax.swing.JButton();
+        tanggalTextField = new javax.swing.JTextField();
 
         tambahMenuItem.setText("jMenuItem1");
         tambahMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -80,9 +135,25 @@ public class FormPenjualan extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setTitle("Form Penjualan Barang");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         tutupButton.setText("Tutup");
-        tutupButton.setNextFocusableComponent(kodeBarangTextField);
         tutupButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tutupButtonActionPerformed(evt);
@@ -97,44 +168,32 @@ public class FormPenjualan extends javax.swing.JInternalFrame {
             }
         });
 
-        lihatButton.setText("Lihat");
-        lihatButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lihatButtonActionPerformed(evt);
-            }
-        });
-
-        kodeBarangTextField.setName("NIM"); // NOI18N
-        kodeBarangTextField.setNextFocusableComponent(lihatButton);
-        kodeBarangTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+        kodePenjualanTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                kodeBarangTextFieldKeyPressed(evt);
+                kodePenjualanTextFieldKeyPressed(evt);
             }
         });
 
-        namaLabel.setLabelFor(namaBarangTextField);
-        namaLabel.setText("Nama Barang");
-
-        nimLabel.setDisplayedMnemonic((int)'N');
-        nimLabel.setLabelFor(kodeBarangTextField);
-        nimLabel.setText("Kode Barang");
-        nimLabel.setNextFocusableComponent(kodeBarangTextField);
-
-        nomorTextField.setEditable(false);
-
-        nilaiPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Penjualan"));
+        penjualanPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Penjualan"));
 
         penjualanTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Kode Barang", "NamaBarang", "Harga", "Banyaknya", "Satuan", "Jumlah"
+                "Kode Barang", "NamaBarang", "Harga", "Qty", "Satuan", "Jumlah"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, true, false, false
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Long.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Long.class
             };
+            boolean[] canEdit = new boolean [] {
+                true, false, false, true, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -159,37 +218,51 @@ public class FormPenjualan extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(penjualanTable);
 
-        javax.swing.GroupLayout nilaiPanelLayout = new javax.swing.GroupLayout(nilaiPanel);
-        nilaiPanel.setLayout(nilaiPanelLayout);
-        nilaiPanelLayout.setHorizontalGroup(
-            nilaiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
+        javax.swing.GroupLayout penjualanPanelLayout = new javax.swing.GroupLayout(penjualanPanel);
+        penjualanPanel.setLayout(penjualanPanelLayout);
+        penjualanPanelLayout.setHorizontalGroup(
+            penjualanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
         );
-        nilaiPanelLayout.setVerticalGroup(
-            nilaiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        penjualanPanelLayout.setVerticalGroup(
+            penjualanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        kelasLabel.setLabelFor(nomorTextField);
-        kelasLabel.setText("No.");
-
-        tanggalTextField.setEditable(false);
-
-        namaBarangTextField.setEditable(false);
+        kodePenjualanLabel.setLabelFor(kodePenjualanTextField);
+        kodePenjualanLabel.setText("Kode Penjualan");
 
         semesterLabel.setLabelFor(tanggalTextField);
         semesterLabel.setText("Tanggal");
 
-        jTextField1.setEditable(false);
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTextField1.setText("jTextField1");
+        totalTextField.setEditable(false);
+        totalTextField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Total : Rp");
 
-        jLabel2.setText("Kepada");
+        customerLabel.setLabelFor(namaCustomerTextField);
+        customerLabel.setText("Customer");
 
-        jButton2.setText("Lihat");
+        namaCustomerTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                namaCustomerTextFieldActionPerformed(evt);
+            }
+        });
+        namaCustomerTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                namaCustomerTextFieldKeyPressed(evt);
+            }
+        });
+
+        lihatButton.setText("Lihat");
+        lihatButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lihatButtonActionPerformed(evt);
+            }
+        });
+
+        tanggalTextField.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -198,74 +271,60 @@ public class FormPenjualan extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
+                        .addGap(41, 41, 41)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(namaLabel)
-                            .addComponent(nimLabel)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(namaBarangTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(kodeBarangTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
-                                    .addComponent(namaCustomerTextField))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton2)
-                                    .addComponent(lihatButton))))
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(kelasLabel)
-                            .addComponent(semesterLabel))
+                            .addComponent(kodePenjualanLabel)
+                            .addComponent(semesterLabel)
+                            .addComponent(customerLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nomorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tanggalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(tanggalTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(namaCustomerTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lihatButton))
+                            .addComponent(kodePenjualanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(236, 236, 236)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(simpanButton, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
                             .addComponent(tutupButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(nilaiPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(57, 57, 57)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                        .addComponent(totalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(penjualanPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(simpanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(simpanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tutupButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(namaCustomerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2)
-                            .addComponent(tanggalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(semesterLabel))
+                            .addComponent(kodePenjualanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(kodePenjualanLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nimLabel)
-                            .addComponent(kodeBarangTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lihatButton))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(namaLabel)
-                    .addComponent(namaBarangTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(kelasLabel)
-                    .addComponent(nomorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tutupButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(nilaiPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(semesterLabel)
+                            .addComponent(tanggalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(namaCustomerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(customerLabel)
+                            .addComponent(lihatButton))
+                        .addGap(33, 33, 33)))
+                .addComponent(penjualanPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1)
+                    .addComponent(totalTextField)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16))
         );
@@ -284,63 +343,72 @@ public class FormPenjualan extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    	public void setKode(String kode){
-        kodeBarangTextField.setText(kode);
+    public void setNamaCustomer(String namaCustomer) {
+        namaCustomerTextField.setText(namaCustomer);
     }
-        public void setMnemonic(){
-            nimLabel.setDisplayedMnemonic('N');
-            lihatButton.setMnemonic('I');
-            simpanButton.setMnemonic('S');
-            tutupButton.setMnemonic('U');
-            
-        }
-    
-    public void setNamaBarang(String namaBarang){
-        namaBarangTextField.setText(namaBarang);
+
+    public void setMnemonic() {
+        customerLabel.setDisplayedMnemonic('C');
+        lihatButton.setMnemonic('I');
+        simpanButton.setMnemonic('S');
+        tutupButton.setMnemonic('U');
+
     }
-    
-    public void setTanggal(String tanggal){
-	tanggalTextField.setText(tanggal);
+
+    public void setTanggal(String tanggal) {
+        tanggalTextField.setText(tanggal);
     }
-    
-    public void setNomor(String nomor){
-	nomorTextField.setText(nomor);
+
+    public void setKodePenjualan(String kodePenjualan) {
+        kodePenjualanTextField.setText(kodePenjualan);
     }
-    
-    public void setNamaBarangTabel(String namaBarangTabel){
-	penjualanTable.setValueAt(namaBarangTabel, penjualanTable.getSelectedRow(), 1);
+
+    public void setNamaBarangTabel(String namaBarangTabel) {
+        penjualanTable.setValueAt(namaBarangTabel, penjualanTable.getSelectedRow(), 1);
     }
-    
-    public void setTambahNilai(Object[] banyaknya){
+
+    public void setHargaBarangTabel(long hargaBarangTabel) {
+        penjualanTable.setValueAt(hargaBarangTabel, penjualanTable.getSelectedRow(), 2);
+    }
+
+    public void setSatuanBarangTabel(String satuanBarangTabel) {
+        penjualanTable.setValueAt(satuanBarangTabel, penjualanTable.getSelectedRow(), 4);
+    }
+
+    public void setJumlahTabel(long jumlah) {
+        penjualanTable.setValueAt(jumlah, penjualanTable.getSelectedRow(), 5);
+    }
+
+    public void setTambahBarang(Object[] banyaknya) {
         int noRecord;
-        
-        if ((noRecord = penjualanDefaultTableModel.getRowCount()-1) >= 0){
-            while ((((penjualanTable.getValueAt(noRecord, 0) == null) || penjualanTable.getValueAt(noRecord, 0).equals("")) && (noRecord > 0))){
+
+        if ((noRecord = penjualanDefaultTableModel.getRowCount() - 1) >= 0) {
+            while ((((penjualanTable.getValueAt(noRecord, 0) == null) || penjualanTable.getValueAt(noRecord, 0).equals("")) && (noRecord > 0))) {
                 noRecord--;
             }
-            
-            if (!((penjualanTable.getValueAt(noRecord, 0) == null) || penjualanTable.getValueAt(noRecord, 0).equals(""))){
+
+            if (!((penjualanTable.getValueAt(noRecord, 0) == null) || penjualanTable.getValueAt(noRecord, 0).equals(""))) {
                 noRecord++;
             }
-            
-            if (noRecord < penjualanDefaultTableModel.getRowCount()){
-                if ((penjualanTable.getValueAt(noRecord, 0) == null) || penjualanTable.getValueAt(noRecord, 0).equals("")){
+
+            if (noRecord < penjualanDefaultTableModel.getRowCount()) {
+                if ((penjualanTable.getValueAt(noRecord, 0) == null) || penjualanTable.getValueAt(noRecord, 0).equals("")) {
                     penjualanDefaultTableModel.removeRow(noRecord--);
                 }
             } else {
                 noRecord--;
             }
         }
-        
+
         penjualanDefaultTableModel.insertRow(++noRecord, banyaknya);
     }
-    
-    public void clearBanyaknyaTable(){
+
+    public void clearBanyaknyaTable() {
         penjualanDefaultTableModel.setRowCount(0);
     }
-    
-    private void klikKananTabel(java.awt.event.MouseEvent evt){
-        if(evt.isPopupTrigger()){
+
+    private void klikKananTabel(java.awt.event.MouseEvent evt) {
+        if (evt.isPopupTrigger()) {
             penjualanPopupMenu.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }
@@ -352,35 +420,35 @@ public class FormPenjualan extends javax.swing.JInternalFrame {
 
     private void penjualanTableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_penjualanTableMouseReleased
         // TODO add your handling code here:
-                Point p = evt.getPoint();
-        int rowNumber = penjualanTable.rowAtPoint( p );
+        Point p = evt.getPoint();
+        int rowNumber = penjualanTable.rowAtPoint(p);
         ListSelectionModel model = penjualanTable.getSelectionModel();
-        model.setSelectionInterval( rowNumber, rowNumber );
-        
+        model.setSelectionInterval(rowNumber, rowNumber);
+
         klikKananTabel(evt);
 
     }//GEN-LAST:event_penjualanTableMouseReleased
 
     private void penjualanTableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_penjualanTableKeyPressed
         // TODO add your handling code here:
-              if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-            if (penjualanTable.getSelectedRow() == (penjualanTable.getRowCount()-1)){
-                if (penjualanTable.getSelectedColumn()==0){
-                    penjualanDefaultTableModel.insertRow( penjualanDefaultTableModel.getRowCount(), new Object[]{}); 
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (penjualanTable.getSelectedRow() == (penjualanTable.getRowCount() - 1)) {
+                if (penjualanTable.getSelectedColumn() == 3) {
+                    penjualanDefaultTableModel.insertRow(penjualanDefaultTableModel.getRowCount(), new Object[]{});
                 } else {
-                    if (penjualanTable.getSelectedColumn() == (penjualanTable.getColumnCount()-1)){
-                        penjualanDefaultTableModel.insertRow( penjualanDefaultTableModel.getRowCount(), new Object[]{});
+                    if (penjualanTable.getSelectedColumn() == (penjualanTable.getColumnCount() - 1)) {
+                        penjualanDefaultTableModel.insertRow(penjualanDefaultTableModel.getRowCount(), new Object[]{});
                         penjualanTable.changeSelection(penjualanTable.getSelectedRow(), 0, false, false);
                     } else {
-                        penjualanTable.changeSelection(penjualanTable.getSelectedRow()-1, penjualanTable.getSelectedColumn()+1, false, false);                    
+                        penjualanTable.changeSelection(penjualanTable.getSelectedRow() - 1, penjualanTable.getSelectedColumn() + 1, false, false);
                     }
                 }
             } else {
-                if (penjualanTable.getSelectedColumn() == (penjualanTable.getColumnCount()-1)){
+                if (penjualanTable.getSelectedColumn() == (penjualanTable.getColumnCount() - 1)) {
                     penjualanTable.changeSelection(penjualanTable.getSelectedRow(), 0, false, false);
                 } else {
-                    penjualanTable.setColumnSelectionInterval(penjualanTable.getSelectedColumn()+1,penjualanTable.getSelectedColumn()+1);
-                    penjualanTable.setRowSelectionInterval(penjualanTable.getSelectedRow()-1,penjualanTable.getSelectedRow()-1);
+                    penjualanTable.setColumnSelectionInterval(penjualanTable.getSelectedColumn() + 1, penjualanTable.getSelectedColumn() + 1);
+                    penjualanTable.setRowSelectionInterval(penjualanTable.getSelectedRow() - 1, penjualanTable.getSelectedRow() - 1);
                 }
             }
         }
@@ -389,73 +457,107 @@ public class FormPenjualan extends javax.swing.JInternalFrame {
 
     private void penjualanTablePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_penjualanTablePropertyChange
         // TODO add your handling code here:
-               if (penjualanTable.getSelectedRowCount()>0){
-            if (penjualanTable.getSelectedColumn()==0){
+        long hitung=0;
+        if (penjualanTable.getSelectedRowCount() > 0) {
+            if (penjualanTable.getSelectedColumn() == 0) {
                 String kodeBarang = "";
+                try {
+                    kodeBarang = penjualanTable.getValueAt(penjualanTable.getSelectedRow(), 0).toString();
+                } catch (Exception ex) {
+                }
+
+                if (!kodeBarang.equals("")) {
+                    penjualanController.cariKodeBarang(kodeBarang);
+                }
+            } else if(penjualanTable.getSelectedColumn()==3){
                 try{
-                    kodeBarang = penjualanTable.getValueAt(penjualanTable.getSelectedRow(), 0).toString();                
-		}catch (Exception ex){}
-                
-		if (!kodeBarang.equals("")){
-//                    penjualanController.cariK(kodeBarang); 	            
-		}
+                qty= Integer.parseInt(penjualanTable.getValueAt(penjualanTable.getSelectedRow(), 3).toString());
+                harga= Long.parseLong(penjualanTable.getValueAt(penjualanTable.getSelectedRow(), 2).toString());
+                }catch(Exception e){}
+                jumlah=qty*harga;
+                penjualanTable.setValueAt(jumlah, penjualanTable.getSelectedRow(), 5);
             }
+             for(int i=0;i<penjualanTable.getRowCount();i++){
+                 try{
+                 hitung+=Long.parseLong(penjualanTable.getValueAt(i, 5).toString());
+                 }catch (Exception ex){}
+                 penjualan.setTotal(hitung);
+                 totalTextField.setText(Long.toString(penjualan.getTotal()));
+             }
         }
+       
 
     }//GEN-LAST:event_penjualanTablePropertyChange
 
     private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
         // TODO add your handling code here:
-  //      penjualanController.simpan(kodeBarangTextField,penjualanTable);
+        penjualanController.simpan(kodePenjualanTextField, namaCustomerTextField, penjualanTable);
+        totalTextField.setText("");
     }//GEN-LAST:event_simpanButtonActionPerformed
-
-    private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lihatButtonActionPerformed
-        // TODO add your handling code here:
-//        penjualanController.tampilkanFormLihatBarang();
-    }//GEN-LAST:event_lihatButtonActionPerformed
-
-    private void kodeBarangTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kodeBarangTextFieldKeyPressed
-        // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            penjualanController.cariBarang(kodeBarangTextField);
-        }
-    }//GEN-LAST:event_kodeBarangTextFieldKeyPressed
 
     private void tambahMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahMenuItemActionPerformed
         // TODO add your handling code here:
-//        penjualanController.tampilkanFormLihatMataKuliah();
+        penjualanController.tampilkanFormLihatBarang();
     }//GEN-LAST:event_tambahMenuItemActionPerformed
 
     private void hapusMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusMenuItemActionPerformed
         // TODO add your handling code here:
-        if(penjualanTable.getSelectedRowCount()>0){
+        if (penjualanTable.getSelectedRowCount() > 0) {
             penjualanDefaultTableModel.removeRow(penjualanTable.getSelectedRow());
         }
     }//GEN-LAST:event_hapusMenuItemActionPerformed
 
+    private void namaCustomerTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_namaCustomerTextFieldKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            penjualanController.cariNamaCustomer(namaCustomerTextField.getText());
+        }
+
+    }//GEN-LAST:event_namaCustomerTextFieldKeyPressed
+
+    private void namaCustomerTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaCustomerTextFieldActionPerformed
+        // TODO add your handling code here:
+
+        penjualanController.cariNamaCustomer(namaCustomerTextField.getText());
+
+
+    }//GEN-LAST:event_namaCustomerTextFieldActionPerformed
+
+    private void kodePenjualanTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kodePenjualanTextFieldKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            penjualanController.cariKodePenjualan(kodePenjualanTextField);
+        }
+    }//GEN-LAST:event_kodePenjualanTextFieldKeyPressed
+
+    private void lihatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lihatButtonActionPerformed
+        // TODO add your handling code here:
+        penjualanController.tampilkanFormLihatCustomer();
+    }//GEN-LAST:event_lihatButtonActionPerformed
+
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        // TODO add your handling code here:
+        tanggalTextField.setText(sdf.format(tgl));
+    }//GEN-LAST:event_formInternalFrameActivated
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel customerLabel;
     private javax.swing.JMenuItem hapusMenuItem;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JLabel kelasLabel;
-    private javax.swing.JTextField kodeBarangTextField;
+    private javax.swing.JLabel kodePenjualanLabel;
+    private javax.swing.JTextField kodePenjualanTextField;
     private javax.swing.JButton lihatButton;
-    private javax.swing.JTextField namaBarangTextField;
     private javax.swing.JTextField namaCustomerTextField;
-    private javax.swing.JLabel namaLabel;
-    private javax.swing.JPanel nilaiPanel;
-    private javax.swing.JLabel nimLabel;
-    private javax.swing.JTextField nomorTextField;
+    private javax.swing.JPanel penjualanPanel;
     private javax.swing.JPopupMenu penjualanPopupMenu;
     private javax.swing.JTable penjualanTable;
     private javax.swing.JLabel semesterLabel;
     private javax.swing.JButton simpanButton;
     private javax.swing.JMenuItem tambahMenuItem;
     private javax.swing.JTextField tanggalTextField;
+    private javax.swing.JTextField totalTextField;
     private javax.swing.JButton tutupButton;
     // End of variables declaration//GEN-END:variables
 }
