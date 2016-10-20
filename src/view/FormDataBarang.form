@@ -62,7 +62,6 @@
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="satuanBarangTextField" min="-2" pref="68" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="kodeBarangTextField" min="-2" pref="123" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -71,6 +70,7 @@
                       <Component id="namaBarangTextField" min="-2" pref="167" max="-2" attributes="0"/>
                       <Component id="stokSpinner" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
                       <Component id="hargaBarangSpinner" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="satuanComboBox" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -102,10 +102,10 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="satuanBarangTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="satuanBarangLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="satuanComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="14" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -158,32 +158,31 @@
         <Component class="javax.swing.JLabel" name="satuanBarangLabel">
           <Properties>
             <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="satuanBarangTextField"/>
+              <ComponentRef name="satuanComboBox"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Satuan :"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="satuanBarangTextField">
-          <Properties>
-            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="simpanButton"/>
-            </Property>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="hargaBarangLabel">
           <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="hargaBarangSpinner"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Harga Rp:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="stokbarangLabel">
           <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="stokSpinner"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Stok:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="stokSpinner">
           <Properties>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="satuanBarangTextField"/>
+              <ComponentRef name="default"/>
             </Property>
           </Properties>
         </Component>
@@ -196,6 +195,21 @@
               <ComponentRef name="stokSpinner"/>
             </Property>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="satuanComboBox">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Item 1"/>
+                <StringItem index="1" value="Item 2"/>
+                <StringItem index="2" value="Item 3"/>
+                <StringItem index="3" value="Item 4"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

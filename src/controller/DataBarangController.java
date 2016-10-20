@@ -49,13 +49,13 @@ public class DataBarangController {
     }
 
     public void simpan(javax.swing.JTextField kodeBarangTextField, javax.swing.JTextField namaBarangTextField,
-            javax.swing.JSpinner hargaBarangSpinner, javax.swing.JSpinner stokSpinner, javax.swing.JTextField satuanBarangTextField) {
+            javax.swing.JSpinner hargaBarangSpinner, javax.swing.JSpinner stokSpinner, javax.swing.JComboBox satuanComboBox) {
         if (!kodeBarangTextField.getText().equals("")) {
             dataBarang.setKodeBarang(kodeBarangTextField.getText());
             dataBarang.setNamaBarang(namaBarangTextField.getText());
             dataBarang.setHargaBarang((long) hargaBarangSpinner.getValue());
             dataBarang.setStokBarang((int) stokSpinner.getValue());
-            dataBarang.setSatuanBarang(satuanBarangTextField.getText());
+            dataBarang.setSatuanBarang(satuanComboBox.getSelectedItem().toString());
 
             if (dataBarang.simpan()) {
                 FormUtama.formDataBarang.setKode("");

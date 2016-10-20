@@ -21,6 +21,8 @@ public class FormDataBarang extends javax.swing.JInternalFrame {
      */
     public FormDataBarang() {
         initComponents();
+        isiSatuanComboBox();
+        setMnemoniccc();
     }
 
     /**
@@ -39,11 +41,11 @@ public class FormDataBarang extends javax.swing.JInternalFrame {
         namaBarangLabel = new javax.swing.JLabel();
         namaBarangTextField = new javax.swing.JTextField();
         satuanBarangLabel = new javax.swing.JLabel();
-        satuanBarangTextField = new javax.swing.JTextField();
         hargaBarangLabel = new javax.swing.JLabel();
         stokbarangLabel = new javax.swing.JLabel();
         stokSpinner = new javax.swing.JSpinner();
         hargaBarangSpinner = new javax.swing.JSpinner();
+        satuanComboBox = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         simpanButton = new javax.swing.JButton();
         hapusButton = new javax.swing.JButton();
@@ -73,19 +75,19 @@ public class FormDataBarang extends javax.swing.JInternalFrame {
 
         namaBarangTextField.setNextFocusableComponent(hargaBarangSpinner);
 
-        satuanBarangLabel.setLabelFor(satuanBarangTextField);
+        satuanBarangLabel.setLabelFor(satuanComboBox);
         satuanBarangLabel.setText("Satuan :");
 
-        satuanBarangTextField.setNextFocusableComponent(simpanButton);
-
+        hargaBarangLabel.setLabelFor(hargaBarangSpinner);
         hargaBarangLabel.setText("Harga Rp:");
 
+        stokbarangLabel.setLabelFor(stokSpinner);
         stokbarangLabel.setText("Stok:");
-
-        stokSpinner.setNextFocusableComponent(satuanBarangTextField);
 
         hargaBarangSpinner.setModel(new javax.swing.SpinnerNumberModel(0L, 0L, null, 1L));
         hargaBarangSpinner.setNextFocusableComponent(stokSpinner);
+
+        satuanComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -101,14 +103,14 @@ public class FormDataBarang extends javax.swing.JInternalFrame {
                     .addComponent(satuanBarangLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(satuanBarangTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(kodeBarangTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(lihatButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(namaBarangTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(stokSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(hargaBarangSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(hargaBarangSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(satuanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -133,9 +135,9 @@ public class FormDataBarang extends javax.swing.JInternalFrame {
                     .addComponent(stokbarangLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(satuanBarangTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(satuanBarangLabel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(satuanBarangLabel)
+                    .addComponent(satuanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         simpanButton.setText("Simpan");
@@ -210,6 +212,26 @@ public class FormDataBarang extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void setMnemoniccc(){
+        lihatButton.setMnemonic('L');
+        simpanButton.setMnemonic('S');
+        hapusButton.setMnemonic('H');
+        tutupButton.setMnemonic('T');
+        
+        kodeBarangLabel.setDisplayedMnemonic('K');
+        namaBarangLabel.setDisplayedMnemonic('N');
+        hargaBarangLabel.setDisplayedMnemonic('A');
+        stokbarangLabel.setDisplayedMnemonic('O');
+        satuanBarangLabel.setDisplayedMnemonic('U');
+        
+        
+    }
+    private void isiSatuanComboBox(){
+        satuanComboBox.removeAllItems();
+        for(int i=0;i<satuan.length;i++){
+            satuanComboBox.addItem(satuan[i]);
+        }
+    }
     public String getKode() {
         return kodeBarangTextField.getText();
     }
@@ -227,11 +249,11 @@ public class FormDataBarang extends javax.swing.JInternalFrame {
     }
 
     public String getSatuan() {
-        return satuanBarangTextField.getText();
+        return satuanComboBox.getSelectedItem().toString();
     }
 
     public void setSatuan(String satuan) {
-        satuanBarangTextField.setText(satuan);
+        satuanComboBox.setSelectedItem(satuan);
     }
 
     public double getHarga() {
@@ -262,7 +284,7 @@ public class FormDataBarang extends javax.swing.JInternalFrame {
 
     private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
         // TODO add your handling code here:
-        dataBarangController.simpan(kodeBarangTextField, namaBarangTextField, hargaBarangSpinner, stokSpinner, satuanBarangTextField);
+        dataBarangController.simpan(kodeBarangTextField, namaBarangTextField, hargaBarangSpinner, stokSpinner, satuanComboBox);
     }//GEN-LAST:event_simpanButtonActionPerformed
 
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
@@ -314,7 +336,7 @@ public class FormDataBarang extends javax.swing.JInternalFrame {
     private javax.swing.JLabel namaBarangLabel;
     private javax.swing.JTextField namaBarangTextField;
     private javax.swing.JLabel satuanBarangLabel;
-    private javax.swing.JTextField satuanBarangTextField;
+    private javax.swing.JComboBox<String> satuanComboBox;
     private javax.swing.JButton simpanButton;
     private javax.swing.JSpinner stokSpinner;
     private javax.swing.JLabel stokbarangLabel;

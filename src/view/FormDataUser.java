@@ -32,9 +32,9 @@ public class FormDataUser extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        kodeBarangLabel = new javax.swing.JLabel();
+        usernameLabel = new javax.swing.JLabel();
         userIdTextField = new javax.swing.JTextField();
-        namaBarangLabel = new javax.swing.JLabel();
+        passwordLabel = new javax.swing.JLabel();
         passwordField = new javax.swing.JPasswordField();
         jPanel2 = new javax.swing.JPanel();
         simpanButton = new javax.swing.JButton();
@@ -46,10 +46,10 @@ public class FormDataUser extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Data User"));
 
-        kodeBarangLabel.setLabelFor(userIdTextField);
-        kodeBarangLabel.setText("Username :");
+        usernameLabel.setLabelFor(userIdTextField);
+        usernameLabel.setText("Username :");
 
-        namaBarangLabel.setText("Password :");
+        passwordLabel.setText("Password :");
 
         passwordField.setText("jPasswordField1");
         passwordField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -65,8 +65,8 @@ public class FormDataUser extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(namaBarangLabel)
-                    .addComponent(kodeBarangLabel))
+                    .addComponent(passwordLabel)
+                    .addComponent(usernameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(userIdTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
@@ -79,10 +79,10 @@ public class FormDataUser extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(userIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(kodeBarangLabel))
+                    .addComponent(usernameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(namaBarangLabel)
+                    .addComponent(passwordLabel)
                     .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(100, Short.MAX_VALUE))
         );
@@ -157,6 +157,15 @@ public class FormDataUser extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+        private void setMnemoniccc(){
+        simpanButton.setMnemonic('S');
+        hapusButton.setMnemonic('H');
+        tutupButton.setMnemonic('T');
+        
+        usernameLabel.setDisplayedMnemonic('U');
+        passwordLabel.setDisplayedMnemonic('P');
+    }
 
     public String getUsername() {
         return userIdTextField.getText();
@@ -234,11 +243,11 @@ public class FormDataUser extends javax.swing.JInternalFrame {
     private javax.swing.JButton hapusButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel kodeBarangLabel;
-    private javax.swing.JLabel namaBarangLabel;
     private javax.swing.JPasswordField passwordField;
+    private javax.swing.JLabel passwordLabel;
     private javax.swing.JButton simpanButton;
     private javax.swing.JButton tutupButton;
     private javax.swing.JTextField userIdTextField;
+    private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 }

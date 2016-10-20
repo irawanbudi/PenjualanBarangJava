@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 16 Okt 2016 pada 17.07
+-- Generation Time: 20 Okt 2016 pada 18.57
 -- Versi Server: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -19,6 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `dbaplikasipenjualan`
 --
+DROP DATABASE `dbaplikasipenjualan`;
 CREATE DATABASE IF NOT EXISTS `dbaplikasipenjualan` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `dbaplikasipenjualan`;
 
@@ -28,6 +29,7 @@ USE `dbaplikasipenjualan`;
 -- Struktur dari tabel `barang`
 --
 
+DROP TABLE IF EXISTS `barang`;
 CREATE TABLE `barang` (
   `kode` varchar(15) NOT NULL,
   `nama` varchar(32) NOT NULL,
@@ -42,6 +44,7 @@ CREATE TABLE `barang` (
 
 INSERT INTO `barang` (`kode`, `nama`, `harga`, `stok`, `satuan`) VALUES
 ('abc123', '546787', 30000, 350, 'pcs'),
+('abc12345', 'Kecap bcd', 2000, 200, 'pcs'),
 ('fgh678', 'asdeh', 65500, 1000, 'kg'),
 ('fghj67676', 'baaranglk', 530000, 350, 'pcs');
 
@@ -51,6 +54,7 @@ INSERT INTO `barang` (`kode`, `nama`, `harga`, `stok`, `satuan`) VALUES
 -- Struktur dari tabel `customer`
 --
 
+DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer` (
   `id` int(11) NOT NULL,
   `nama` varchar(32) NOT NULL,
@@ -72,6 +76,7 @@ INSERT INTO `customer` (`id`, `nama`, `alamat`, `telp`) VALUES
 -- Struktur dari tabel `penjualan`
 --
 
+DROP TABLE IF EXISTS `penjualan`;
 CREATE TABLE `penjualan` (
   `kodepenjualan` varchar(32) NOT NULL,
   `tanggal` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -93,7 +98,11 @@ INSERT INTO `penjualan` (`kodepenjualan`, `tanggal`, `idcustomer`, `kasir`, `kod
 ('laris231', '1970-01-01 00:00:00', 2, 'null', 'fgh678', 2, 5),
 ('laris345', '1970-01-01 00:00:00', 2, 'null', 'fgh678', 3, 6),
 ('abcde9898', '2016-10-16 00:00:00', 2, 'kasir', 'abc123', 1, 7),
-('abcde9898', '2016-10-16 00:00:00', 2, 'kasir', 'fgh678', 2, 8);
+('abcde9898', '2016-10-16 00:00:00', 2, 'kasir', 'fgh678', 2, 8),
+('laris1234', '2016-10-16 00:00:00', 3, 'kasir', 'abc123', 5, 9),
+('laris1234', '2016-10-16 00:00:00', 3, 'kasir', 'fgh678', 2, 10),
+('abc1234', '2016-10-17 00:00:00', 3, 'kasir', 'fgh678', 89, 11),
+('abc1234', '2016-10-17 00:00:00', 3, 'kasir', 'abc123', 34, 12);
 
 -- --------------------------------------------------------
 
@@ -101,6 +110,7 @@ INSERT INTO `penjualan` (`kodepenjualan`, `tanggal`, `idcustomer`, `kasir`, `kod
 -- Struktur dari tabel `suplier`
 --
 
+DROP TABLE IF EXISTS `suplier`;
 CREATE TABLE `suplier` (
   `id` int(11) NOT NULL,
   `nama` varchar(32) NOT NULL,
@@ -121,6 +131,7 @@ INSERT INTO `suplier` (`id`, `nama`, `alamat`, `telp`) VALUES
 -- Struktur dari tabel `user`
 --
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `username` varchar(32) NOT NULL,
   `password` varchar(255) NOT NULL
@@ -185,7 +196,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `suplier`
 --

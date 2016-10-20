@@ -20,6 +20,7 @@ public class FormDataCustomer extends javax.swing.JInternalFrame {
      */
     public FormDataCustomer() {
         initComponents();
+        setMnemoniccc();
     }
 
     /**
@@ -33,10 +34,10 @@ public class FormDataCustomer extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         lihatButton = new javax.swing.JButton();
-        kodeBarangLabel = new javax.swing.JLabel();
+        namaCustomerLabel = new javax.swing.JLabel();
         namaCustomerTextField = new javax.swing.JTextField();
-        namaBarangLabel = new javax.swing.JLabel();
-        hargaBarangLabel = new javax.swing.JLabel();
+        alamatCustomerLabel = new javax.swing.JLabel();
+        telpCustomerLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         alamatCustomerTextArea = new javax.swing.JTextArea();
         telpCustomerTextField = new javax.swing.JTextField();
@@ -59,12 +60,14 @@ public class FormDataCustomer extends javax.swing.JInternalFrame {
             }
         });
 
-        kodeBarangLabel.setLabelFor(namaCustomerTextField);
-        kodeBarangLabel.setText("Nama :");
+        namaCustomerLabel.setLabelFor(namaCustomerTextField);
+        namaCustomerLabel.setText("Nama :");
 
-        namaBarangLabel.setText("Alamat :");
+        alamatCustomerLabel.setLabelFor(alamatCustomerTextArea);
+        alamatCustomerLabel.setText("Alamat :");
 
-        hargaBarangLabel.setText("Telp :");
+        telpCustomerLabel.setLabelFor(telpCustomerTextField);
+        telpCustomerLabel.setText("Telp :");
 
         jScrollPane1.setMaximumSize(new java.awt.Dimension(183, 60));
         jScrollPane1.setMinimumSize(new java.awt.Dimension(183, 60));
@@ -81,9 +84,9 @@ public class FormDataCustomer extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(hargaBarangLabel)
-                    .addComponent(namaBarangLabel)
-                    .addComponent(kodeBarangLabel))
+                    .addComponent(telpCustomerLabel)
+                    .addComponent(alamatCustomerLabel)
+                    .addComponent(namaCustomerLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -101,14 +104,14 @@ public class FormDataCustomer extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(namaCustomerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lihatButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(kodeBarangLabel))
+                    .addComponent(namaCustomerLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(namaBarangLabel)
+                    .addComponent(alamatCustomerLabel)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(hargaBarangLabel)
+                    .addComponent(telpCustomerLabel)
                     .addComponent(telpCustomerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21))
         );
@@ -184,6 +187,19 @@ public class FormDataCustomer extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+      private void setMnemoniccc(){
+        lihatButton.setMnemonic('L');
+        simpanButton.setMnemonic('S');
+        hapusButton.setMnemonic('H');
+        tutupButton.setMnemonic('T');
+        
+        alamatCustomerLabel.setDisplayedMnemonic('A');
+        namaCustomerLabel.setDisplayedMnemonic('N');
+        telpCustomerLabel.setDisplayedMnemonic('E');
+        
+        
+    }
 
     public String getNama() {
         return namaCustomerTextField.getText();
@@ -264,17 +280,17 @@ dataCustomerController.simpan(namaCustomerTextField, alamatCustomerTextArea, tel
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel alamatCustomerLabel;
     private javax.swing.JTextArea alamatCustomerTextArea;
     private javax.swing.JButton hapusButton;
-    private javax.swing.JLabel hargaBarangLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel kodeBarangLabel;
     private javax.swing.JButton lihatButton;
-    private javax.swing.JLabel namaBarangLabel;
+    private javax.swing.JLabel namaCustomerLabel;
     private javax.swing.JTextField namaCustomerTextField;
     private javax.swing.JButton simpanButton;
+    private javax.swing.JLabel telpCustomerLabel;
     private javax.swing.JTextField telpCustomerTextField;
     private javax.swing.JButton tutupButton;
     // End of variables declaration//GEN-END:variables

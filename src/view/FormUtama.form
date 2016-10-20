@@ -100,11 +100,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Penjualan"/>
               </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="stokBarangMenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Stok Barang"/>
-              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="laporanPenjualanMenuItemActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

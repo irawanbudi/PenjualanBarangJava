@@ -20,6 +20,7 @@ public class FormDataSuplier extends javax.swing.JInternalFrame {
      */
     public FormDataSuplier() {
         initComponents();
+        setMnemoniccc();
     }
 
     /**
@@ -184,6 +185,19 @@ public class FormDataSuplier extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+        private void setMnemoniccc(){
+        lihatButton.setMnemonic('L');
+        simpanButton.setMnemonic('S');
+        hapusButton.setMnemonic('H');
+        tutupButton.setMnemonic('T');
+        
+        alamatLabel.setDisplayedMnemonic('A');
+        namaLabel.setDisplayedMnemonic('N');
+        telpLabel.setDisplayedMnemonic('E');
+        
+        
+    }
 
     public String getNama() {
         return namaSuplierTextField.getText();

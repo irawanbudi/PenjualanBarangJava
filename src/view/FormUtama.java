@@ -25,6 +25,7 @@ public class FormUtama extends javax.swing.JFrame {
     public static FormDataUser formDataUser = new FormDataUser();
     public final FormDeskripsi formDeskripsi = new FormDeskripsi(this, true);
     public final FormLogin formLogin = new FormLogin(this, true);
+    public static FormLaporanPenjualan formLaporanPenjualan=new FormLaporanPenjualan();
     private String username;
 
     public String getUsername() {
@@ -71,7 +72,6 @@ public class FormUtama extends javax.swing.JFrame {
         transaksiPenjualanMenuItem = new javax.swing.JMenuItem();
         laporanMenu = new javax.swing.JMenu();
         laporanPenjualanMenuItem = new javax.swing.JMenuItem();
-        stokBarangMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -166,10 +166,12 @@ public class FormUtama extends javax.swing.JFrame {
         laporanMenu.setText("Laporan");
 
         laporanPenjualanMenuItem.setText("Penjualan");
+        laporanPenjualanMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                laporanPenjualanMenuItemActionPerformed(evt);
+            }
+        });
         laporanMenu.add(laporanPenjualanMenuItem);
-
-        stokBarangMenuItem.setText("Stok Barang");
-        laporanMenu.add(stokBarangMenuItem);
 
         jMenuBar1.add(laporanMenu);
 
@@ -202,7 +204,6 @@ public class FormUtama extends javax.swing.JFrame {
         dataSuplierMenuItem.setMnemonic('S');
         transaksiPenjualanMenuItem.setMnemonic('P');
         laporanPenjualanMenuItem.setMnemonic('P');
-        stokBarangMenuItem.setMnemonic('S');
         deskripsiMenuItem.setMnemonic('D');
         dataUserMenuItem.setMnemonic('U');
 
@@ -324,6 +325,21 @@ public class FormUtama extends javax.swing.JFrame {
 
     }//GEN-LAST:event_dataUserMenuItemActionPerformed
 
+    private void laporanPenjualanMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laporanPenjualanMenuItemActionPerformed
+        // TODO add your handling code here:
+       if ((formLaporanPenjualan != null) && (formLaporanPenjualan.isVisible())) {
+            try {
+                formLaporanPenjualan.setSelected(true);
+            } catch (PropertyVetoException e) {
+            }
+        } else {
+            formLaporanPenjualan = new FormLaporanPenjualan();
+            mdiDesktopPane.add(formLaporanPenjualan);
+            formLaporanPenjualan.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_laporanPenjualanMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -375,7 +391,6 @@ public class FormUtama extends javax.swing.JFrame {
     private javax.swing.JMenuItem loginMenuItem;
     private javax.swing.JMenu masterDataMenu;
     private javax.swing.JDesktopPane mdiDesktopPane;
-    private javax.swing.JMenuItem stokBarangMenuItem;
     private javax.swing.JMenu transaksiMenu;
     private javax.swing.JMenuItem transaksiPenjualanMenuItem;
     // End of variables declaration//GEN-END:variables

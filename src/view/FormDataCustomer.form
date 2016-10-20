@@ -54,9 +54,9 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="hargaBarangLabel" min="-2" max="-2" attributes="0"/>
-                      <Component id="namaBarangLabel" min="-2" max="-2" attributes="0"/>
-                      <Component id="kodeBarangLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="telpCustomerLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="alamatCustomerLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="namaCustomerLabel" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -79,16 +79,16 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="namaCustomerTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lihatButton" alignment="3" max="-2" attributes="0"/>
-                      <Component id="kodeBarangLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="namaCustomerLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="namaBarangLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="alamatCustomerLabel" min="-2" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="60" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="12" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="hargaBarangLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="telpCustomerLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="telpCustomerTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
@@ -111,7 +111,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lihatButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="kodeBarangLabel">
+        <Component class="javax.swing.JLabel" name="namaCustomerLabel">
           <Properties>
             <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="namaCustomerTextField"/>
@@ -121,13 +121,19 @@
         </Component>
         <Component class="javax.swing.JTextField" name="namaCustomerTextField">
         </Component>
-        <Component class="javax.swing.JLabel" name="namaBarangLabel">
+        <Component class="javax.swing.JLabel" name="alamatCustomerLabel">
           <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="alamatCustomerTextArea"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Alamat :"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="hargaBarangLabel">
+        <Component class="javax.swing.JLabel" name="telpCustomerLabel">
           <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="telpCustomerTextField"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Telp :"/>
           </Properties>
         </Component>

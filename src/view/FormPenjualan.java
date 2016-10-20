@@ -7,6 +7,7 @@ package view;
 import controller.PenjualanController;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JTextField;
@@ -24,10 +25,19 @@ public class FormPenjualan extends javax.swing.JInternalFrame {
     private final PenjualanController penjualanController = new PenjualanController();
     private final Penjualan penjualan = new Penjualan();
     private int idCustomer, qty;
-    long jumlah, harga;
+    long jumlah, harga, total;
     private String Username;
-    private java.util.Date tgl=new Date();
-    private java.text.SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+    private java.util.Date tgl = new Date();
+    private java.text.SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    private java.text.DecimalFormat rp=new DecimalFormat("Rp #,###.##");
+
+    public long getTotal() {
+        return total;
+    }
+
+    public void setTotal(long total) {
+        this.total = total;
+    }
 
     public String getUsername() {
         return Username;
@@ -85,8 +95,7 @@ public class FormPenjualan extends javax.swing.JInternalFrame {
 
         penjualanDefaultTableModel = (DefaultTableModel) penjualanTable.getModel();
         setMnemonic();
-        
-        
+
     }
 
     /**
@@ -355,6 +364,10 @@ public class FormPenjualan extends javax.swing.JInternalFrame {
 
     }
 
+    public void setTotalTextField(String t) {
+        this.totalTextField.setText(t);
+    }
+
     public void setTanggal(String tanggal) {
         tanggalTextField.setText(tanggal);
     }
@@ -435,21 +448,17 @@ public class FormPenjualan extends javax.swing.JInternalFrame {
             if (penjualanTable.getSelectedRow() == (penjualanTable.getRowCount() - 1)) {
                 if (penjualanTable.getSelectedColumn() == 3) {
                     penjualanDefaultTableModel.insertRow(penjualanDefaultTableModel.getRowCount(), new Object[]{});
-                } else {
-                    if (penjualanTable.getSelectedColumn() == (penjualanTable.getColumnCount() - 1)) {
-                        penjualanDefaultTableModel.insertRow(penjualanDefaultTableModel.getRowCount(), new Object[]{});
-                        penjualanTable.changeSelection(penjualanTable.getSelectedRow(), 0, false, false);
-                    } else {
-                        penjualanTable.changeSelection(penjualanTable.getSelectedRow() - 1, penjualanTable.getSelectedColumn() + 1, false, false);
-                    }
-                }
-            } else {
-                if (penjualanTable.getSelectedColumn() == (penjualanTable.getColumnCount() - 1)) {
+                } else if (penjualanTable.getSelectedColumn() == (penjualanTable.getColumnCount() - 1)) {
+                    penjualanDefaultTableModel.insertRow(penjualanDefaultTableModel.getRowCount(), new Object[]{});
                     penjualanTable.changeSelection(penjualanTable.getSelectedRow(), 0, false, false);
                 } else {
-                    penjualanTable.setColumnSelectionInterval(penjualanTable.getSelectedColumn() + 1, penjualanTable.getSelectedColumn() + 1);
-                    penjualanTable.setRowSelectionInterval(penjualanTable.getSelectedRow() - 1, penjualanTable.getSelectedRow() - 1);
+                    penjualanTable.changeSelection(penjualanTable.getSelectedRow() - 1, penjualanTable.getSelectedColumn() + 1, false, false);
                 }
+            } else if (penjualanTable.getSelectedColumn() == (penjualanTable.getColumnCount() - 1)) {
+                penjualanTable.changeSelection(penjualanTable.getSelectedRow(), 0, false, false);
+            } else {
+                penjualanTable.setColumnSelectionInterval(penjualanTable.getSelectedColumn() + 1, penjualanTable.getSelectedColumn() + 1);
+                penjualanTable.setRowSelectionInterval(penjualanTable.getSelectedRow() - 1, penjualanTable.getSelectedRow() - 1);
             }
         }
 
@@ -457,7 +466,7 @@ public class FormPenjualan extends javax.swing.JInternalFrame {
 
     private void penjualanTablePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_penjualanTablePropertyChange
         // TODO add your handling code here:
-        long hitung=0;
+        long hitung = 0;
         if (penjualanTable.getSelectedRowCount() > 0) {
             if (penjualanTable.getSelectedColumn() == 0) {
                 String kodeBarang = "";
@@ -469,23 +478,26 @@ public class FormPenjualan extends javax.swing.JInternalFrame {
                 if (!kodeBarang.equals("")) {
                     penjualanController.cariKodeBarang(kodeBarang);
                 }
-            } else if(penjualanTable.getSelectedColumn()==3){
-                try{
-                qty= Integer.parseInt(penjualanTable.getValueAt(penjualanTable.getSelectedRow(), 3).toString());
-                harga= Long.parseLong(penjualanTable.getValueAt(penjualanTable.getSelectedRow(), 2).toString());
-                }catch(Exception e){}
-                jumlah=qty*harga;
-                penjualanTable.setValueAt(jumlah, penjualanTable.getSelectedRow(), 5);
+            } else if (penjualanTable.getSelectedColumn() == 3) {
+                try {
+                    qty = Integer.parseInt(penjualanTable.getValueAt(penjualanTable.getSelectedRow(), 3).toString());
+                    harga = Long.parseLong(penjualanTable.getValueAt(penjualanTable.getSelectedRow(), 2).toString());
+                } catch (Exception e) {
+                }
+                //jumlah=qty*harga;
+                penjualanTable.setValueAt(penjualanController.getJumlah(), penjualanTable.getSelectedRow(), 5);
             }
-             for(int i=0;i<penjualanTable.getRowCount();i++){
-                 try{
-                 hitung+=Long.parseLong(penjualanTable.getValueAt(i, 5).toString());
-                 }catch (Exception ex){}
-                 penjualan.setTotal(hitung);
-                 totalTextField.setText(Long.toString(penjualan.getTotal()));
-             }
+            for (int i = 0; i < penjualanTable.getRowCount(); i++) {
+                try {
+                    hitung += Long.parseLong(penjualanTable.getValueAt(i, 5).toString());
+                } catch (Exception ex) {
+                }
+                penjualan.setTotal(hitung);
+                totalTextField.setText(rp.format(penjualan.getTotal()));
+            }
+
         }
-       
+
 
     }//GEN-LAST:event_penjualanTablePropertyChange
 
@@ -512,7 +524,7 @@ public class FormPenjualan extends javax.swing.JInternalFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             penjualanController.cariNamaCustomer(namaCustomerTextField.getText());
         }
-
+        totalTextField.setText(Long.toString(getTotal()));
     }//GEN-LAST:event_namaCustomerTextFieldKeyPressed
 
     private void namaCustomerTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaCustomerTextFieldActionPerformed
