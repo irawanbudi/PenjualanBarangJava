@@ -285,7 +285,7 @@ public class Penjualan {
 
             if (resultSet != null) {
                 try {
-                    JasperDesign disain = JRXmlLoader.load("src\\report\\penjualan.jrxml");
+                    JasperDesign disain = JRXmlLoader.load("src/report/penjualan.jrxml");
                     JasperReport penjualanLaporan = JasperCompileManager.compileReport(disain);
                     JRResultSetDataSource resultSetDataSource = new JRResultSetDataSource(resultSet);
                     System.out.println("Cetak Laporan");

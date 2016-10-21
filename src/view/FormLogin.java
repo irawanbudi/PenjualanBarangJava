@@ -27,6 +27,7 @@ public class FormLogin extends javax.swing.JDialog {
         initComponents();
 
         userLogin = "";
+        passwordField.setText("");
         setMnemonic();
     }
 

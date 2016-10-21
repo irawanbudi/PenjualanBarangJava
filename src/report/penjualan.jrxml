@@ -31,8 +31,7 @@ FROM
 	<field name="penjualan_kodebarang" class="java.lang.String"/>
 	<field name="penjualan_qty" class="java.lang.Integer"/>
 	<field name="customer_nama" class="java.lang.String"/>
-	<field name="barang_id" class="java.lang.String"/>
-	<field name="barang_nama" class="java.lang.String"/>
+		<field name="barang_nama" class="java.lang.String"/>
 	<field name="barang_harga" class="java.lang.Long"/>
 	<field name="barang_stok" class="java.lang.Integer"/>
 	<field name="barang_satuan" class="java.lang.String"/>
