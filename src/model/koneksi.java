@@ -15,10 +15,10 @@ import java.sql.SQLException;
  */
 public class koneksi {
     //com.mysql.
-    private static final String driver = "com.mysql.jdbc.Driver";
-    private static final String database = "jdbc:mysql://localhost:3306/dbaplikasipenjualan";
-    private static final String user = "root";
-    private static final String password = "";
+    private static final String dbDriver = "com.mysql.jdbc.Driver";
+    private static final String dbName = "jdbc:mysql://localhost:3306/dbaplikasipenjualan";
+    private static final String dbUser = "root";
+    private static final String dbPassword = "";
     
     private Connection connection;        
     private String pesanKesalahan;
@@ -32,16 +32,16 @@ public class koneksi {
         pesanKesalahan = "";
         
         try{ 
-            Class.forName(driver); 
+            Class.forName(dbDriver); 
         } catch (ClassNotFoundException ex){ 
             pesanKesalahan = "JDBC Driver tidak ditemukan atau rusak\n"+ex;
         } 
         
         if (pesanKesalahan.equals("")){ 
             try { 
-                connection = DriverManager.getConnection(database,user,password); 
+                connection = DriverManager.getConnection(dbName,dbUser,dbPassword); 
             } catch (SQLException ex) { 
-                pesanKesalahan = "Koneksi ke "+database+" gagal\n"+ex;
+                pesanKesalahan = "Koneksi ke "+dbName+" gagal\n"+ex;
             }
         }
         
