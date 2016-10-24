@@ -42,6 +42,7 @@ public class Penjualan {
     private String username;
     private long total;
     private view.FormLaporanPenjualan formLaporanPenjualan;
+    private DataBarang dataBarang = new DataBarang();
 
     public long getTotal() {
         return total;
@@ -146,8 +147,8 @@ public class Penjualan {
         Connection connection;
 
         if ((connection = conn.getConnection()) != null) {
-            int jumlahSimpan = 0;
-            String SQLStatemen;
+            int jumlahSimpan = 0, stok = 0;
+            String SQLStatemen, kode;
             Statement sta;
             ResultSet rsa;
             try {
@@ -158,7 +159,8 @@ public class Penjualan {
             }
 
             for (int i = 0; i < listPenjualan.length; i++) {
-
+                kode = listPenjualan[i][4].toString();
+                stok = (int) listPenjualan[i][5];
                 try {
                     SQLStatemen = "insert into penjualan (`kodepenjualan`, "
                             + "`tanggal`, `idcustomer`, `kasir`, `kodebarang`,"
@@ -166,9 +168,24 @@ public class Penjualan {
                             + tanggal + "','" + idCustomer + "','" + "kasir" + "','"
                             + listPenjualan[i][4] + "','" + listPenjualan[i][5] + "')";
                     sta = connection.createStatement();
-                    System.out.println("Query= " + SQLStatemen);
+                    //System.out.println("Query= " + SQLStatemen);
                     jumlahSimpan += sta.executeUpdate(SQLStatemen);
                 } catch (SQLException ex) {
+                }
+
+                if (dataBarang.baca(kode)) {
+                    stok = dataBarang.getStokBarang() - stok;
+
+                    try {
+                        SQLStatemen = "update `barang` set `stok`=" + stok
+                                + "  where `kode`='" + kode + "'";
+                        System.out.println("update tabel barang: " + SQLStatemen);
+                        sta = connection.createStatement();
+                        stok = sta.executeUpdate(SQLStatemen);
+                        System.out.println(stok);
+
+                    } catch (SQLException e) {
+                    }
                 }
 
             }
@@ -239,7 +256,7 @@ public class Penjualan {
     public boolean cetakLaporan(String tipe, String kodePenjualan,
             java.util.Date awal, java.util.Date akhir) {
         boolean adaKesalahan = false;
-        
+
         Connection connection;
 
         if ((connection = conn.getConnection()) != null) {
@@ -273,10 +290,10 @@ public class Penjualan {
                         SQLStatement = SQLStatement + " where penjualan.`kodepenjualan`='" + kodePenjualan + "' ";
                     }
                 } else {
-                    SQLStatement=SQLStatement+" where DATE_FORMAT(penjualan.`tanggal`,'%Y-%m-%d')>='"+bentuk.format(awal)+"' AND "
-                            +"DATE_FORMAT(penjualan.`tanggal`,'%Y-%m-%d')<='"+bentuk.format(akhir)+"'";
+                    SQLStatement = SQLStatement + " where DATE_FORMAT(penjualan.`tanggal`,'%Y-%m-%d')>='" + bentuk.format(awal) + "' AND "
+                            + "DATE_FORMAT(penjualan.`tanggal`,'%Y-%m-%d')<='" + bentuk.format(akhir) + "'";
                 }
-                                 System.out.println("Query: "+SQLStatement);
+                System.out.println("Query: " + SQLStatement);
                 resultSet = statement.executeQuery(SQLStatement);
 //                System.out.println("resultset: "+resultSet);
             } catch (SQLException ex) {

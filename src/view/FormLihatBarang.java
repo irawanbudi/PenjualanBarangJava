@@ -59,11 +59,11 @@ public class FormLihatBarang extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Kode Barang", "Nama Barang"
+                "Kode Barang", "Nama Barang", "Stok", "Satuan"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -85,6 +85,12 @@ public class FormLihatBarang extends javax.swing.JDialog {
             dataBarangTabel.getColumnModel().getColumn(0).setMinWidth(100);
             dataBarangTabel.getColumnModel().getColumn(0).setPreferredWidth(100);
             dataBarangTabel.getColumnModel().getColumn(0).setMaxWidth(100);
+            dataBarangTabel.getColumnModel().getColumn(2).setMinWidth(50);
+            dataBarangTabel.getColumnModel().getColumn(2).setPreferredWidth(50);
+            dataBarangTabel.getColumnModel().getColumn(2).setMaxWidth(50);
+            dataBarangTabel.getColumnModel().getColumn(3).setMinWidth(70);
+            dataBarangTabel.getColumnModel().getColumn(3).setPreferredWidth(70);
+            dataBarangTabel.getColumnModel().getColumn(3).setMaxWidth(70);
         }
 
         jLabel1.setLabelFor(dataBarangTabel);

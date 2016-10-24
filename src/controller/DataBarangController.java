@@ -8,6 +8,7 @@ package controller;
 import javax.swing.JOptionPane;
 import model.DataBarang;
 import view.FormLihatBarang;
+import view.FormStokBarang;
 import view.FormUtama;
 //tes
 
@@ -19,6 +20,7 @@ public class DataBarangController {
 
     private final DataBarang dataBarang = new DataBarang();
     private FormLihatBarang formLihatBarang;
+   // private FormStokBarang formStokBarang;
 
     public void tampilkanFormLihatBarang() {
         formLihatBarang = new FormLihatBarang(null, true);
@@ -70,20 +72,37 @@ public class DataBarangController {
             JOptionPane.showMessageDialog(null, "Kode barang tidak boleh kosong", "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
     }
-    public void hapus(javax.swing.JTextField kodeBarangTextField){
-        if (!kodeBarangTextField.getText().equals("")){
-            if (dataBarang.hapus(kodeBarangTextField.getText())){
+
+    public void hapus(javax.swing.JTextField kodeBarangTextField) {
+        if (!kodeBarangTextField.getText().equals("")) {
+            if (dataBarang.hapus(kodeBarangTextField.getText())) {
                 FormUtama.formDataBarang.setKode("");
                 FormUtama.formDataBarang.setNama("");
                 FormUtama.formDataBarang.setHarga(1000);
                 FormUtama.formDataBarang.setStok(1);
                 FormUtama.formDataBarang.setSatuan("pcs");
-            }else {
+            } else {
                 JOptionPane.showMessageDialog(null, dataBarang.getPesan(), "Kesalahan", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Kode barang tidak boleh kosong", "Kesalahan", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public Object[][] tampilkanStokBarang() {
+            
+        if (dataBarang.bacaData()) {
+            return dataBarang.getList();
+
+                      
+        } else {
+            JOptionPane.showMessageDialog(null, dataBarang.getPesan());
+        }
+        return dataBarang.getList();
+    }
+
+    public void cetakStokBarang() {
+        dataBarang.cetakLaporanStokBarang();
     }
 
 }
